@@ -1326,10 +1326,10 @@
         if (transition === undefined) {
           transition = false;
         }
-        g.classed('LabelBox', true);
+        g.classed('TextBox', true);
         // Create 'background' rectangle
-        var width = this.data.length+10,
-            height = 30;
+        var width = this.data.length*9+10,
+            height = 20;
         g.selectAll('rect').data([null]).enter()
           .append('rect')
           .attr('x', 0)
@@ -1340,11 +1340,19 @@
           .style('stroke', '#000000')
           .style('stroke-width', '1px');
         // Create join data, one <text> element per datum
-        g.selectAll('text').enter()
-         .text(this.data)
-         .attr('fill', 'black');
-
-
+        var join = g.selectAll('g').data(this.data);
+        join.enter().append('g')
+          .classed('legend-item', true);
+        join.selectAll('text').data([null])
+          .enter()
+          .append('text')
+          .attr('x', 5)
+          .attr('y', 15)
+          .attr("font-family","sans-serif")
+          .style("font-weight", "normal")
+          .style("text-anchor", "start")
+          .style('fill', config.color)
+          .text(this.data);
         // Set up dragging on the container element
         var initPosition = g.data()[0] === undefined ? [{x: config.x, y: config.y}] : g.data();
         g.data(initPosition);

@@ -95,6 +95,7 @@
   hGauss.addPlotable(d3.plotable.Histogram('gaussian', gaussian));
   hGauss.addPlotable(d3.plotable.Histogram('landau', landau));
   hGauss.addOrnament(d3.plotable.TextBox('gaussianInfo', gaussianInfo));
+  hGauss.addOrnament(d3.plotable.LabelBox('lab', 'Name Gaussian'));
   h2DGauss.addPlotable(d3.plotable.Histogram2D('gaussian2d', data2d.data));
   lineChart.addPlotable(d3.plotable.LineChart('sinc', sinc));
   lineChart.addPlotable(d3.plotable.LineChart('line', line, {showPoints: true, showUncertainties: true, interpolation: 'linear', color: 'green'}));

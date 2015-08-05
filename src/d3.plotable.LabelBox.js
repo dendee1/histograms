@@ -1,21 +1,12 @@
 /*
  * d3.plotable.LabelBox
  *
- * d3.plotable which draws a box containg key-value pairs of information.
- * Each pair is displayed on a single line, with the key justified to the left,
- * and the value justified on the right.
+ * d3.plotable which draws a box containg the label of the histogram.
  *
  * Data API
  * --------
- * The data object is an array of arrays, each of which must contain two items:
- * a 'key', index 0, and a 'value', index 1.
- * Both the 'key' and the 'value' are allowed to be empty strings.
- * Be aware that the 'value' is best specified as a string, otherwise the value
- * will be transformed via toString, possibly leading to undesirable formatting.
+ * The data object is a string. 
  *
- * Example:
- *
- *   [['Name', 'My Thing'], ['Mean', '0.456'], ['RMS', '1.0']]
  *
  * Configuration
  * -------------
@@ -56,10 +47,10 @@
         if (transition === undefined) {
           transition = false;
         }
-        g.classed('LabelBox', true);
+        g.classed('TextBox', true);
         // Create 'background' rectangle
-        var width = 150,
-            height = this.data.length*20 + 10;
+        var width = this.data.length*9+10,
+            height = 20;
         g.selectAll('rect').data([null]).enter()
           .append('rect')
           .attr('x', 0)
@@ -72,16 +63,17 @@
         // Create join data, one <text> element per datum
         var join = g.selectAll('g').data(this.data);
         join.enter().append('g')
-          .classed('legend-item', true)
-          .attr('transform', function(d, i) { return 'translate(0,' + (20 + i*20) + ')'; });
-        join.selectAll('text').data(function(d) { return d; })
+          .classed('legend-item', true);
+        join.selectAll('text').data([null])
           .enter()
           .append('text')
-          // Align the key value to the left, value to right, padded by 5px
-          .attr('x', function(d, i) { return [5, width - 5][i]; })
-          .attr('text-anchor', function(d, i) { return ['start', 'end'][i]; })
+          .attr('x', 5)
+          .attr('y', 15)
+          .attr("font-family","sans-serif")
+          .style("font-weight", "normal")
+          .style("text-anchor", "start")
           .style('fill', config.color)
-          .text(function(d) { return d; });
+          .text(this.data);
         // Set up dragging on the container element
         var initPosition = g.data()[0] === undefined ? [{x: config.x, y: config.y}] : g.data();
         g.data(initPosition);
