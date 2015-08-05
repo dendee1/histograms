@@ -1340,7 +1340,7 @@
           .style('stroke', '#000000')
           .style('stroke-width', '1px');
         // Create join data, one <text> element per datum
-        g.selectAll('text')
+        g.selectAll('text').enter()
          .text(this.data)
          .attr('fill', 'black');
 
