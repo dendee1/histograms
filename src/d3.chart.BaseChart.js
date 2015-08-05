@@ -25,7 +25,7 @@
       var chart = this;
 
       chart.margins = {
-        top: 10,
+        top: 23,
         bottom: 40,
         left: 60,
         right: 10,

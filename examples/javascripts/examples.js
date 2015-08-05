@@ -90,6 +90,8 @@
     ['RMS', '1.0']
   ];
 
+
+  
   // Draw plotables on to charts
   hGauss.addPlotable(d3.plotable.Histogram('steps', steps, {showUncertainties: true}));
   hGauss.addPlotable(d3.plotable.Histogram('gaussian', gaussian));
