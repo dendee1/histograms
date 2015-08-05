@@ -1328,7 +1328,7 @@
         }
         g.classed('LabelBox', true);
         // Create 'background' rectangle
-        var width = this.data.length*20+10,
+        var width = this.data.length+10,
             height = 30;
         g.selectAll('rect').data([null]).enter()
           .append('rect')
@@ -1342,8 +1342,7 @@
         // Create join data, one <text> element per datum
         var join = g.selectAll('g').data(this.data);
         join.enter().append('g')
-          .classed('legend-item', true)
-          .attr('transform', function(d, i) { return 'translate(0,' + (20 + i*20) + ')'; });
+          .classed('legend-item', true);
         join.selectAll('text').data(function(d) { return d; })
           .enter()
           .append('text')
