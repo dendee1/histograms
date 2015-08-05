@@ -1328,7 +1328,7 @@
         }
         g.classed('LabelBox', true);
         // Create 'background' rectangle
-        var width = this.data.length,
+        var width = this.data.length*20+10,
             height = 30;
         g.selectAll('rect').data([null]).enter()
           .append('rect')
