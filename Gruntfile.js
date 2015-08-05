@@ -14,12 +14,13 @@ module.exports = function(grunt) {
           'src/d3.plotable.TextBox.js',
           'src/d3.plotable.Histogram.js',
           'src/d3.plotable.Histogram2D.js',
-          'src/d3.plotable.LineChart.js'
+          'src/d3.plotable.LineChart.js',
+          'src/d3.plotable.LabelBox.js'
         ],
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
-    // Minify the result of the concatenation, creating an additional file
+    //  Minify the result of the concatenation, creating an additional file
     uglify: {
       options: {
         banner: '/* <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
