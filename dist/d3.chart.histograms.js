@@ -1340,17 +1340,11 @@
           .style('stroke', '#000000')
           .style('stroke-width', '1px');
         // Create join data, one <text> element per datum
-        var join = g.selectAll('g').data(this.data);
-        join.enter().append('g')
-          .classed('legend-item', true);
-        join.selectAll('text').data(function(d) { return d; })
-          .enter()
-          .append('text')
-          // Align the key value to the left, value to right, padded by 5px
-          .attr('x', function(d, i) { return [5, width - 5][i]; })
-          .attr('text-anchor', function(d, i) { return ['start', 'end'][i]; })
-          .style('fill', config.color)
-          .text(function(d) { return d; });
+        g.selectAll('text')
+         .text(this.data)
+         .attr('fill', 'black');
+
+
         // Set up dragging on the container element
         var initPosition = g.data()[0] === undefined ? [{x: config.x, y: config.y}] : g.data();
         g.data(initPosition);
