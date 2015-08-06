@@ -61,10 +61,10 @@
           .style('stroke', '#000000')
           .style('stroke-width', '1px');
         // Create join data, one <text> element per datum
-        var join = g.selectAll('g').data(this.data);
-        join.enter().append('g')
-          .classed('legend-item', true);
-        join.selectAll('text').data([null])
+//        var join = g.selectAll('g').data("");
+//        join.enter().append('g')
+//          .classed('legend-item', true);
+        g.selectAll('text').data([null])
           .enter()
           .append('text')
           .attr('x', 5)
