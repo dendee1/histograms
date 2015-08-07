@@ -1327,22 +1327,6 @@
           transition = false;
         }
         g.classed('TextBox', true);
-        // Create 'background' rectangle
-        var width = this.data.length*9+10,
-            height = 20;
-        g.selectAll('rect').data([null]).enter()
-          .append('rect')
-          .attr('x', 0)
-          .attr('y', -19)
-          .attr('width', width)
-          .attr('height', height)
-          .style('fill', '#ffffff')
-          .style('stroke', '#000000')
-          .style('stroke-width', '1px');
-        // Create join data, one <text> element per datum
-//        var join = g.selectAll('g').data("");
-//        join.enter().append('g')
-//          .classed('legend-item', true);
         g.selectAll('text').data([null])
           .enter()
           .append('text')
@@ -1353,6 +1337,23 @@
           .style("text-anchor", "start")
           .style('fill', config.color)
           .text(this.data);
+        // Create 'background' rectangle
+        var width = g.selectAll('text').node().getComputedTextLength()+10,
+            height = 20;
+        console.log(width);
+        //maximum width
+        if (width>axes.width()) width = axes.width();
+        console.log(width);
+        g.selectAll('rect').data([null]).enter()
+          .append('rect')
+          .attr('x', 0)
+          .attr('y', -19)
+          .attr('width', width)
+          .attr('height', height)
+          .style('fill', 'transparent')
+          .style('stroke', '#000000')
+          .style('stroke-width', '1px');
+        g.classed('legend-item', true);
         // Set up dragging on the container element
         var initPosition = g.data()[0] === undefined ? [{x: config.x, y: config.y}] : g.data();
         g.data(initPosition);
