@@ -34,6 +34,9 @@
     if (config.y === undefined) {
       config.y = 20;
     }
+    if (config.bkg === undefined) {
+      config.bkg = "transparent";
+    }
     return {
       name: name,
       data: data,
@@ -75,9 +78,10 @@
           .attr('y', -19)
           .attr('width', width)
           .attr('height', height)
-          .style('fill', 'transparent')
+          .style('fill', config.bkg)
           .style('stroke', '#000000')
           .style('stroke-width', '1px');
+        g.selectAll('text').moveToFront();
         g.classed('legend-item', true);
         // Set up dragging on the container element
         var initPosition = g.data()[0] === undefined ? [{x: config.x, y: config.y}] : g.data();
@@ -94,6 +98,12 @@
       }
     };
   };
+
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
 
   d3.plotable = d3.plotable || {};
   d3.plotable.LabelBox = LabelBox;
