@@ -70,6 +70,8 @@
         {x: 6, y: 0.6, xerr: [0.3, 0.3], yerr: [0.1, 0.1]}
       ];
 
+   console.log(sinc);
+
   // Define our charts
   var hGauss = makeChart(d3.select('#h1'))
       .xAxisLabel('Vertex position [mm]')
