@@ -839,10 +839,10 @@
       config.color = '#000000';
     }
     if (config.x === undefined) {
-      config.x = 70;
+      config.x = 0;
     }
     if (config.y === undefined) {
-      config.y = 20;
+      config.y = 0;
     }
     return {
       name: name,
@@ -850,6 +850,9 @@
       xDomain: function() { return []; },
       yDomain: function() { return []; },
       draw: function(axes, g, transition) {
+        config.x = config.x + axes.margins.left;
+        config.y = config.y + axes.margins.top;
+
         if (arguments.length === 0) {
           console.error('Cannot draw ' + this.name + ', no arguments given');
           return;
@@ -861,6 +864,21 @@
         // Create 'background' rectangle
         var width = 150,
             height = this.data.length*20 + 10;
+
+        //maximum width
+        if (width>axes.width()) width = axes.width();
+        //move to the left if the name is too long
+        if (config.x + width > axes.margins.left+axes.width()) config.x = axes.margins.left + axes.width() - width;
+        //still be visible
+        if(config.x<0) config.x = 0;
+
+        //maximum height
+        if (height>axes.height()) height = axes.height();
+        //move down if the name is too long
+        if (config.y + width > axes.margins.top+axes.height()) config.y = axes.margins.top + axes.height() - height;
+        //still be visible
+        if(config.y<0) config.y = 0;
+
         g.selectAll('rect').data([null]).enter()
           .append('rect')
           .attr('x', 0)
@@ -1308,7 +1326,7 @@
       config.color = '#000000';
     }
     if (config.x === undefined) {
-      config.x = 70;
+      config.x = 0;
     }
     if (config.y === undefined) {
       config.y = 20;
@@ -1326,6 +1344,8 @@
         if (transition === undefined) {
           transition = false;
         }
+        //put margin to x coordinate:
+        config.x = config.x + axes.margins.left;
         g.classed('TextBox', true);
         g.selectAll('text').data([null])
           .enter()
@@ -1340,10 +1360,12 @@
         // Create 'background' rectangle
         var width = g.selectAll('text').node().getComputedTextLength()+10,
             height = 20;
-        console.log(width);
         //maximum width
         if (width>axes.width()) width = axes.width();
-        console.log(width);
+        //move to the left if the name is too long
+        if (config.x + width > axes.margins.left+axes.width()) config.x = axes.margins.left + axes.width() - width;
+        //still be visible
+        if(config.x<0) config.x = 0;
         g.selectAll('rect').data([null]).enter()
           .append('rect')
           .attr('x', 0)

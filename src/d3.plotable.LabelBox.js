@@ -29,7 +29,7 @@
       config.color = '#000000';
     }
     if (config.x === undefined) {
-      config.x = 70;
+      config.x = 0;
     }
     if (config.y === undefined) {
       config.y = 20;
@@ -47,6 +47,8 @@
         if (transition === undefined) {
           transition = false;
         }
+        //put margin to x coordinate:
+        config.x = config.x + axes.margins.left;
         g.classed('TextBox', true);
         g.selectAll('text').data([null])
           .enter()
@@ -61,10 +63,12 @@
         // Create 'background' rectangle
         var width = g.selectAll('text').node().getComputedTextLength()+10,
             height = 20;
-        console.log(width);
         //maximum width
         if (width>axes.width()) width = axes.width();
-        console.log(width);
+        //move to the left if the name is too long
+        if (config.x + width > axes.margins.left+axes.width()) config.x = axes.margins.left + axes.width() - width;
+        //still be visible
+        if(config.x<0) config.x = 0;
         g.selectAll('rect').data([null]).enter()
           .append('rect')
           .attr('x', 0)
