@@ -15,7 +15,8 @@ module.exports = function(grunt) {
           'src/d3.plotable.Histogram.js',
           'src/d3.plotable.Histogram2D.js',
           'src/d3.plotable.LineChart.js',
-          'src/d3.plotable.LabelBox.js'
+          'src/d3.plotable.LabelBox.js',
+          'src/d3.plotable.ProfileChart.js',
         ],
         dest: 'dist/<%= pkg.name %>.js'
       }
